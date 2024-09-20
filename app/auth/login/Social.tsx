@@ -1,10 +1,11 @@
 "use client";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+import { signIn } from "next-auth/react";
 
 const SocialButton = () => {
   const handleSignIn = (provider: "google" | "github") => {
-    console.log(provider);
+    signIn(provider, { callbackUrl: "/clients" });
   };
   return (
     <div className="flex flex-col space-y-4 items-center w-full gap-x-2">
