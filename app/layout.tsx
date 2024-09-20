@@ -19,7 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-theme="emerald">
-      <body className={poppins.className}>{children}</body>
+      <body className={poppins.className}>
+        <main className="bg-gradient-to-tr from-sky-200 to-blue-400 h-full">
+          {children}
+        </main>
+      </body>
     </html>
   );
 }
