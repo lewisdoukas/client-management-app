@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import FormError from "@/components/FormError";
 import Spinner from "@/components/Spinner";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 type ClientFormData = z.infer<typeof clientSchema>;
 
@@ -43,7 +44,12 @@ const NewClientPage = () => {
   return (
     <main className="max-w-xl h-full p-4">
       <form className="card-body" onSubmit={onSubmit}>
-        <h1 className="font-semibold text-2xl">Add new client</h1>
+        <div className="flex justify-between items-center">
+          <h1 className="font-semibold text-2xl">Add new client</h1>
+          <Link href="/clients" className="hover:underline">
+            ← Back
+          </Link>
+        </div>
 
         {error && <FormError message={error} />}
 
