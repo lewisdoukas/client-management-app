@@ -1,7 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import Social from "./Social";
-import FormError from "../Error";
+import FormError from "../../../components/FormError";
 
 const LoginPage = () => {
   const searchParams = useSearchParams();

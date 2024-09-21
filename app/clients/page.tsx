@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import SignOutButton from "../auth/SignOutButton";
+import SignOutButton from "../../components/SignOutButton";
 
 const ClientsPage = async () => {
   const session = await auth();
