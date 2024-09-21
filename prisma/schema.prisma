@@ -26,6 +26,39 @@ model User {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  isAdmin Boolean @default(false)
+}
+
+model Client {
+  id          String  @id @default(cuid())
+  firstname   String
+  lastname    String
+  email       String? @unique
+  address     String?
+  phoneNumber String?
+
+  cases Case[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Status {
+  OPEN
+  IN_PROGRESS
+  CLOSED
+}
+
+model Case {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  status      Status   @default(OPEN)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  clientId    String   @db.VarChar(255)
+  client      Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
 }
 
 model Account {
