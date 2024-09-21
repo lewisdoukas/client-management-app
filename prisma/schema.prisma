@@ -34,9 +34,9 @@ model Client {
   id          String  @id @default(cuid())
   firstname   String
   lastname    String
+  phoneNumber String  @unique
   email       String? @unique
   address     String?
-  phoneNumber String?
 
   cases Case[]
 
