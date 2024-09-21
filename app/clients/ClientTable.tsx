@@ -14,8 +14,8 @@ interface Props {
 
 const ClientTable = ({ searchParams, clients }: Props) => {
   return (
-    <div className="overflow-x-auto p-4">
-      <table className="table">
+    <div className="overflow-x-auto p-4 flex justify-center items-center">
+      <table className="table lg:max-w-2xl">
         <thead className="text-lg text-black font-semibold">
           <tr>
             {columns.map((column) => (
@@ -38,7 +38,9 @@ const ClientTable = ({ searchParams, clients }: Props) => {
           {clients.map((client) => (
             <tr key={client.id}>
               <td>
-                {client.lastname} {client.firstname}
+                <Link href={`/clients/${client.id}`}>
+                  {client.lastname} {client.firstname}
+                </Link>
               </td>
               <td>{client.phoneNumber}</td>
               <td className="hidden md:table-cell">

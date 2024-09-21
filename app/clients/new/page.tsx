@@ -32,6 +32,7 @@ const NewClientPage = () => {
       await axios.post("/api/clients", data);
 
       setSubmitting(false);
+      router.push("/clients");
       router.refresh();
 
       toast.success("Client created!");
