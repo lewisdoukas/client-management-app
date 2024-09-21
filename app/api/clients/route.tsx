@@ -6,7 +6,7 @@ import { auth } from "@/auth";
 export async function POST(request: NextRequest) {
   const session = await auth();
 
-  if (!session) {
+  if (!session || !session.user.isAdmin) {
     return NextResponse.json({}, { status: 401 });
   }
 
@@ -18,15 +18,15 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(validation.error.errors, { status: 400 });
   }
 
-  const { firstname, lastname, phoneNumber } = validation.data;
+  const { firstname, lastname, phoneNumber, email, address } = validation.data;
 
   const newClient = await prisma.client.create({
     data: {
       firstname,
       lastname,
       phoneNumber,
-      email: body?.email,
-      address: body?.address,
+      email,
+      address,
     },
   });
 
