@@ -3,15 +3,27 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import SignOutButton from "../../components/SignOutButton";
 import { prisma } from "@/prisma/client";
+import ClientTable, { ClientQuery, columnNames } from "./ClientTable";
 
-const ClientsPage = async () => {
+const ClientsPage = async ({ searchParams }: { searchParams: ClientQuery }) => {
   const session = await auth();
 
   if (!session.user.isAdmin) {
     redirect("/contact");
   }
 
-  const clients = await prisma.client.findMany();
+  const orderBy = columnNames.includes(searchParams.orderBy)
+    ? { [searchParams.orderBy]: "asc" }
+    : undefined;
+
+  const page = parseInt(searchParams.page) || 1;
+  const pageSize = 10;
+
+  const clients = await prisma.client.findMany({
+    orderBy,
+    skip: (page - 1) * pageSize,
+    take: pageSize,
+  });
 
   return (
     <main className="w-full h-full">
@@ -21,28 +33,7 @@ const ClientsPage = async () => {
         </Link>
         <SignOutButton />
       </div>
-      <div className="overflow-x-auto p-4">
-        <table className="table">
-          <thead className="text-lg text-black font-semibold">
-            <tr>
-              <th>Firstname</th>
-              <th>Lastname</th>
-              <th>Phone number</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {clients.map((client) => (
-              <tr key={client.id}>
-                <td>{client.firstname}</td>
-                <td>{client.lastname}</td>
-                <td>{client.phoneNumber}</td>
-                <td>Edit</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <ClientTable searchParams={searchParams} clients={clients} />
     </main>
   );
 };
