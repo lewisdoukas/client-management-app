@@ -55,7 +55,7 @@ const NewClientPage = () => {
 
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Firtname</span>
+            <span className="label-text">Firstname</span>
           </label>
           <input
             placeholder="John"
