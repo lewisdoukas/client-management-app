@@ -40,7 +40,10 @@ const ClientTable = ({ searchParams, clients }: Props) => {
           {clients.map((client) => (
             <tr key={client.id}>
               <td>
-                <Link href={`/clients/${client.id}`}>
+                <Link
+                  href={`/clients/${client.id}`}
+                  className="hover:text-secondary"
+                >
                   {client.lastname} {client.firstname}
                 </Link>
               </td>

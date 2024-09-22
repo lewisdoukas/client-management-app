@@ -53,7 +53,12 @@ const CaseTable = ({ searchParams, cases }: Props) => {
               <td>{item.title}</td>
               <td>{item.status}</td>
               <td>
-                {item.client.lastname} {item.client.firstname}
+                <Link
+                  href={`/clients/${item.clientId}`}
+                  className="hover:text-secondary"
+                >
+                  {item.client.lastname} {item.client.firstname}
+                </Link>
               </td>
               <td className="hidden md:table-cell">
                 {item.updatedAt.toLocaleString()}
