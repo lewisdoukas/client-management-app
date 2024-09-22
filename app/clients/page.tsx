@@ -2,8 +2,8 @@ import { auth } from "@/auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import SignOutButton from "../../components/SignOutButton";
-import { prisma } from "@/prisma/client";
 import ClientTable, { ClientQuery, columnNames } from "./ClientTable";
+import { prisma } from "@/prisma/client";
 import Pagination from "@/components/Pagination";
 
 const ClientsPage = async ({ searchParams }: { searchParams: ClientQuery }) => {
@@ -38,39 +38,12 @@ const ClientsPage = async ({ searchParams }: { searchParams: ClientQuery }) => {
       </div>
 
       <div role="tablist" className="tabs tabs-lifted mt-4 text-center">
-        <input
-          type="radio"
-          name="tabs"
-          role="tab"
-          className="tab font-semibold"
-          aria-label="Clients"
-          defaultChecked
+        <ClientTable searchParams={searchParams} clients={clients} />
+        <Pagination
+          pageSize={pageSize}
+          currentPage={page}
+          itemCount={clientCount}
         />
-        <div
-          role="tabpanel"
-          className="tab-content bg-base-100 border-base-300 rounded-box p-6"
-        >
-          <ClientTable searchParams={searchParams} clients={clients} />
-          <Pagination
-            pageSize={pageSize}
-            currentPage={page}
-            itemCount={clientCount}
-          />
-        </div>
-
-        <input
-          type="radio"
-          name="tabs"
-          role="tab"
-          className="tab font-semibold"
-          aria-label="Cases"
-        />
-        <div
-          role="tabpanel"
-          className="tab-content bg-base-100 border-base-300 rounded-box p-6"
-        >
-          cases
-        </div>
       </div>
     </main>
   );
