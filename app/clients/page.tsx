@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import SignOutButton from "../../components/SignOutButton";
 import { prisma } from "@/prisma/client";
 import ClientTable, { ClientQuery, columnNames } from "./ClientTable";
+import Pagination from "@/components/Pagination";
 
 const ClientsPage = async ({ searchParams }: { searchParams: ClientQuery }) => {
   const session = await auth();
@@ -24,6 +25,8 @@ const ClientsPage = async ({ searchParams }: { searchParams: ClientQuery }) => {
     skip: (page - 1) * pageSize,
     take: pageSize,
   });
+
+  const clientCount = await prisma.client.count();
 
   return (
     <main className="w-full h-full p-4">
@@ -48,6 +51,11 @@ const ClientsPage = async ({ searchParams }: { searchParams: ClientQuery }) => {
           className="tab-content bg-base-100 border-base-300 rounded-box p-6"
         >
           <ClientTable searchParams={searchParams} clients={clients} />
+          <Pagination
+            pageSize={pageSize}
+            currentPage={page}
+            itemCount={clientCount}
+          />
         </div>
 
         <input
