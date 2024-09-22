@@ -1,10 +1,11 @@
 import { auth } from "@/auth";
+import DeleteButton from "@/components/DeleteButton";
+import EditButton from "@/components/EditButton";
 import { prisma } from "@/prisma/client";
 import { Client } from "@prisma/client";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { cache } from "react";
-import { BsPencil } from "react-icons/bs";
 
 interface Props {
   params: { id: string };
@@ -36,13 +37,10 @@ const ClientDetailsPage = async ({ params }: Props) => {
             <h2 className="card-title text-2xl">
               {client.lastname} {client.firstname}
             </h2>
-            <Link
-              className="btn btn-secondary btn-sm px-4"
-              href={`/clients/edit/${client.id}`}
-            >
-              <BsPencil />
-              Edit
-            </Link>
+            <div className="flex flex-col space-y-4 w-[35%]">
+              <EditButton path={`/clients/edit/${client.id}`} />
+              <DeleteButton path={`/clients/${client.id}`} />
+            </div>
           </div>
 
           {columns.map((column) => (

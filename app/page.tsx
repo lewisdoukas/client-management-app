@@ -11,9 +11,9 @@ export default function Home() {
           <Link href="/auth/login" className="btn btn-secondary">
             Login
           </Link>
-          <Link href="contact" className="btn btn-accent">
+          {/* <Link href="contact" className="btn btn-accent">
             Contact
-          </Link>
+          </Link> */}
         </div>
       </div>
     </main>

@@ -50,8 +50,13 @@ const ClientForm = ({ client }: Props) => {
   return (
     <form className="card-body" onSubmit={onSubmit}>
       <div className="flex justify-between items-center">
-        <h1 className="font-semibold text-2xl">Add new client</h1>
-        <Link href="/clients" className="hover:underline">
+        <h1 className="font-semibold text-2xl">
+          {client ? "Update client" : "Add new client"}
+        </h1>
+        <Link
+          href={client ? `/clients/${client.id}` : "/clients"}
+          className="hover:underline"
+        >
           ← Back
         </Link>
       </div>
