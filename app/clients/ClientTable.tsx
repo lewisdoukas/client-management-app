@@ -13,6 +13,8 @@ interface Props {
 }
 
 const ClientTable = ({ searchParams, clients }: Props) => {
+  if (!clients) return null;
+
   return (
     <div className="overflow-x-auto p-4 flex justify-center items-center">
       <table className="table lg:max-w-2xl">

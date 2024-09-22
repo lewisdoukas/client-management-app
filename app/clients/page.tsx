@@ -26,14 +26,44 @@ const ClientsPage = async ({ searchParams }: { searchParams: ClientQuery }) => {
   });
 
   return (
-    <main className="w-full h-full">
-      <div className="flex p-4 justify-between">
+    <main className="w-full h-full p-4">
+      <div className="flex justify-between">
         <Link className="btn btn-primary" href="/clients/new">
           New Client
         </Link>
         <SignOutButton />
       </div>
-      <ClientTable searchParams={searchParams} clients={clients} />
+
+      <div role="tablist" className="tabs tabs-lifted mt-6 text-center">
+        <input
+          type="radio"
+          name="tabs"
+          role="tab"
+          className="tab font-semibold"
+          aria-label="Clients"
+          defaultChecked
+        />
+        <div
+          role="tabpanel"
+          className="tab-content bg-base-100 border-base-300 rounded-box p-6"
+        >
+          <ClientTable searchParams={searchParams} clients={clients} />
+        </div>
+
+        <input
+          type="radio"
+          name="tabs"
+          role="tab"
+          className="tab font-semibold"
+          aria-label="Cases"
+        />
+        <div
+          role="tabpanel"
+          className="tab-content bg-base-100 border-base-300 rounded-box p-6"
+        >
+          cases
+        </div>
+      </div>
     </main>
   );
 };
