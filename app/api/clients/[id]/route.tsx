@@ -78,11 +78,11 @@ export async function POST(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  //   const session = await auth();
+  const session = await auth();
 
-  //   if (!session || !session.user.isAdmin) {
-  //     return NextResponse.json({}, { status: 401 });
-  //   }
+  if (!session || !session.user.isAdmin) {
+    return NextResponse.json({}, { status: 401 });
+  }
 
   const body = await request.json();
 
