@@ -7,3 +7,8 @@ export const clientSchema = z.object({
   email: z.string().email().optional().nullable(),
   address: z.string().max(255).optional().nullable(),
 });
+
+export const caseSchema = z.object({
+  title: z.string().min(1, "Title is required").max(255),
+  description: z.string().min(1, "Description is required").max(65535),
+});

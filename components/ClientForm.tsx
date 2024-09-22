@@ -38,7 +38,7 @@ const ClientForm = ({ client }: Props) => {
       else await axios.post("/api/clients", data);
 
       setSubmitting(false);
-      router.push("/clients");
+      router.push(client ? `/clients/${client.id}` : "/clients");
       router.refresh();
 
       toast.success(client ? "Client updated!" : "Client created!");

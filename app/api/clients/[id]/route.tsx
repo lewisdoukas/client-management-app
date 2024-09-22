@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { clientSchema } from "@/app/validationSchemas";
+import { clientSchema, caseSchema } from "@/app/validationSchemas";
 import { auth } from "@/auth";
 import { prisma } from "@/prisma/client";
 
@@ -71,4 +71,36 @@ export async function DELETE(
   });
 
   return NextResponse.json({});
+}
+
+// To create a case
+export async function POST(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  //   const session = await auth();
+
+  //   if (!session || !session.user.isAdmin) {
+  //     return NextResponse.json({}, { status: 401 });
+  //   }
+
+  const body = await request.json();
+
+  const validation = caseSchema.safeParse(body);
+
+  if (!validation.success) {
+    return NextResponse.json(validation.error.errors, { status: 400 });
+  }
+
+  const { title, description } = validation.data;
+
+  const newCase = await prisma.case.create({
+    data: {
+      title,
+      description,
+      clientId: params.id,
+    },
+  });
+
+  return NextResponse.json(newCase, { status: 201 });
 }

@@ -33,7 +33,7 @@ const DeleteButton = ({ path }: { path: string }) => {
   return (
     <>
       <button
-        className="btn btn-outline btn-sm btn-error"
+        className="btn btn-outline btn-sm btn-error w-1/2"
         onClick={() =>
           (
             document.getElementById("deleteModal") as HTMLDialogElement

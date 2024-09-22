@@ -29,7 +29,7 @@ const ClientsPage = async ({ searchParams }: { searchParams: ClientQuery }) => {
   const clientCount = await prisma.client.count();
 
   return (
-    <main className="w-full h-full p-4">
+    <main className="w-full h-full p-2">
       <div className="flex justify-between">
         <Link className="btn btn-primary" href="/clients/new">
           New Client
@@ -37,7 +37,7 @@ const ClientsPage = async ({ searchParams }: { searchParams: ClientQuery }) => {
         <SignOutButton />
       </div>
 
-      <div role="tablist" className="tabs tabs-lifted mt-6 text-center">
+      <div role="tablist" className="tabs tabs-lifted mt-4 text-center">
         <input
           type="radio"
           name="tabs"
