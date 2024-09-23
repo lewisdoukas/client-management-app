@@ -13,53 +13,69 @@ export type ExtendedCase = Case & {
   client: Client;
 };
 
+export type ExtendedClient = Client & {
+  cases: ExtendedCase[];
+};
+
 interface Props {
   searchParams: CaseQuery;
-  cases: ExtendedCase[];
+  cases?: ExtendedCase[] | undefined;
+  client?: ExtendedClient | undefined;
 }
 
-const CaseTable = ({ searchParams, cases }: Props) => {
-  if (!cases) return null;
+const CaseTable = ({ searchParams, cases, client }: Props) => {
+  const items = cases ?? client.cases;
+
+  if (items.length === 0) return null;
 
   return (
-    <div className="overflow-x-auto flex justify-center items-center">
+    <div className="overflow-x-auto flex justify-center items-center mt-4">
       <table className="table lg:max-w-2xl">
         <thead className="text-lg text-black font-semibold">
           <tr>
-            {columns.map((column) => (
-              <th key={column.value} className={column.className}>
-                <Link
-                  href={{
-                    query: {
-                      ...searchParams,
-                      orderBy: column.value === "client" ? null : column.value,
-                      client: column.value === "client",
-                    },
-                  }}
-                >
-                  {column.label}
-                </Link>
-                {(column.value === searchParams.orderBy ||
-                  (!searchParams.orderBy &&
-                    column.value === "client" &&
-                    searchParams.client)) && <IoMdArrowUp className="inline" />}
-              </th>
-            ))}
+            {columns.map((column) =>
+              column.label === "Client" && client ? null : (
+                <th key={column.value} className={column.className}>
+                  <Link
+                    href={{
+                      query: {
+                        ...searchParams,
+                        orderBy:
+                          column.value === "client" ? null : column.value,
+                        client: column.value === "client",
+                      },
+                    }}
+                  >
+                    {column.label}
+                  </Link>
+                  {(column.value === searchParams.orderBy ||
+                    (!searchParams.orderBy &&
+                      column.value === "client" &&
+                      searchParams.client)) && (
+                    <IoMdArrowUp className="inline" />
+                  )}
+                </th>
+              )
+            )}
           </tr>
         </thead>
         <tbody>
-          {cases.map((item) => (
+          {items.map((item) => (
             <tr key={item.id}>
               <td>{item.title}</td>
               <td>{item.status}</td>
-              <td>
-                <Link
-                  href={`/clients/${item.clientId}`}
-                  className="hover:text-secondary"
-                >
-                  {item.client.lastname} {item.client.firstname}
-                </Link>
-              </td>
+
+              {client ? null : (
+                <td>
+                  <Link
+                    href={`/clients/${item.clientId}`}
+                    className="hover:text-secondary"
+                  >
+                    {item.client.lastname} {item.client.firstname}
+                  </Link>
+                </td>
+              )}
+
               <td className="hidden md:table-cell">
                 {item.updatedAt.toLocaleString()}
               </td>
