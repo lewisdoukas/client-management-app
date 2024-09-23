@@ -49,7 +49,7 @@ const ClientTable = ({ searchParams, clients }: Props) => {
               </td>
               <td>{client.phoneNumber}</td>
               <td className="hidden md:table-cell">
-                {client.updatedAt.toLocaleString()}
+                {client.updatedAt.toLocaleString("en-GB")}
               </td>
             </tr>
           ))}

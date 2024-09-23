@@ -77,7 +77,7 @@ const CaseTable = ({ searchParams, cases, client }: Props) => {
               )}
 
               <td className="hidden md:table-cell">
-                {item.updatedAt.toLocaleString()}
+                {item.updatedAt.toLocaleString("en-GB")}
               </td>
             </tr>
           ))}

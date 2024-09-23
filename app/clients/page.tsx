@@ -32,7 +32,7 @@ const ClientsPage = async ({ searchParams }: { searchParams: ClientQuery }) => {
     <main className="w-full h-full p-2">
       <div className="flex justify-between">
         <div className="flex justify-center items-center space-x-4">
-          <Link className="btn btn-primary" href="/clients/new">
+          <Link className="btn btn-neutral" href="/clients/new">
             New Client
           </Link>
           <Link className="btn btn-secondary" href="/clients/cases">

@@ -35,7 +35,7 @@ const ClientDetailsPage = async ({ params, searchParams }: Props) => {
         <ClientCard client={client} />
         <div className="lg:col-span-3 px-4">
           <div className="flex items-center justify-between lg:justify-center lg:space-x-12">
-            <Link className="btn btn-primary" href="/clients/new">
+            <Link className="btn btn-secondary" href="/clients/new">
               New Case
             </Link>
             <Link className="hover:underline" href="/clients">
