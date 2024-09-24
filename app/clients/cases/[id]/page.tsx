@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 import { prisma } from "@/prisma/client";
 import { notFound, redirect } from "next/navigation";
 import React, { cache } from "react";
-import { ExtendedCase } from "../../CaseTable";
+import { ExtendedCase } from "../../../../components/CaseTable";
 import CaseCard from "@/components/CaseCard";
 
 interface Props {

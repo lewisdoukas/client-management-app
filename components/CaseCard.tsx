@@ -1,7 +1,7 @@
 import React from "react";
 import EditButton from "./EditButton";
 import DeleteButton from "./DeleteButton";
-import { ExtendedCase } from "@/app/clients/CaseTable";
+import { ExtendedCase } from "@/components/CaseTable";
 import { LuUser2 } from "react-icons/lu";
 import { BsTelephone } from "react-icons/bs";
 

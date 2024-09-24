@@ -4,7 +4,10 @@ import { prisma } from "@/prisma/client";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { cache } from "react";
-import CaseTable, { CaseQuery, ExtendedClient } from "../CaseTable";
+import CaseTable, {
+  CaseQuery,
+  ExtendedClient,
+} from "../../../components/CaseTable";
 
 interface Props {
   params: { id: string };

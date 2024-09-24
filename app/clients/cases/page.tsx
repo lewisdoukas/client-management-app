@@ -1,5 +1,8 @@
 import React from "react";
-import CaseTable, { CaseQuery, columnNames } from "../CaseTable";
+import CaseTable, {
+  CaseQuery,
+  columnNames,
+} from "../../../components/CaseTable";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { Status } from "@prisma/client";

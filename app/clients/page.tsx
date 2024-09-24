@@ -2,7 +2,10 @@ import { auth } from "@/auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import SignOutButton from "../../components/SignOutButton";
-import ClientTable, { ClientQuery, columnNames } from "./ClientTable";
+import ClientTable, {
+  ClientQuery,
+  columnNames,
+} from "../../components/ClientTable";
 import { prisma } from "@/prisma/client";
 import Pagination from "@/components/Pagination";
 
