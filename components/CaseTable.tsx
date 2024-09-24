@@ -1,6 +1,7 @@
 import { Case, Client, Status } from "@prisma/client";
 import Link from "next/link";
 import { IoMdArrowUp } from "react-icons/io";
+import CaseStatusBadge from "./CaseStatusBadge";
 
 export interface CaseQuery {
   orderBy: keyof Case;
@@ -70,7 +71,9 @@ const CaseTable = ({ searchParams, cases, client }: Props) => {
                   {item.title}
                 </Link>
               </td>
-              <td>{item.status}</td>
+              <td>
+                <CaseStatusBadge status={item.status} />
+              </td>
 
               {client ? null : (
                 <td>

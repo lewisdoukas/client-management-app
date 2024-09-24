@@ -5,14 +5,16 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { Case, Client } from "@prisma/client";
+import classnames from "classnames";
 
 interface Props {
   path: string;
   client?: Client;
   _case?: Case;
+  card: boolean;
 }
 
-const DeleteButton = ({ path, client, _case }: Props) => {
+const DeleteButton = ({ path, client, _case, card = false }: Props) => {
   const [error, setError] = useState("");
   const [isSubmitting, setSubmitting] = useState(false);
 
@@ -44,7 +46,10 @@ const DeleteButton = ({ path, client, _case }: Props) => {
   return (
     <>
       <button
-        className="btn btn-outline btn-sm btn-error w-1/2 lg:w-1/4"
+        className={classnames({
+          "btn btn-outline btn-sm btn-error w-1/2": true,
+          "lg:w-1/4": card,
+        })}
         onClick={() =>
           (
             document.getElementById("deleteModal") as HTMLDialogElement
