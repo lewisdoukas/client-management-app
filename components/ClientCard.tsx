@@ -18,10 +18,13 @@ const ClientCard = ({ client }: { client: Client }) => {
             <BsTelephone />
             {client.phoneNumber}
           </div>
-          <div className="flex justify-start items-center gap-x-2">
-            <IoMailOutline />
-            {client.email}
-          </div>
+
+          {client.email && (
+            <div className="flex justify-start items-center gap-x-2">
+              <IoMailOutline />
+              {client.email}
+            </div>
+          )}
 
           {client.address && (
             <div className="flex justify-start items-center gap-x-2 text-start">
