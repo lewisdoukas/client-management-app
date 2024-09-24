@@ -24,7 +24,7 @@ const statusMap: Record<
 const CaseStatusBadge = ({ status }: Props) => {
   return (
     <div
-      className={`badge font-semibold p-4 ${statusMap[status].bg} ${statusMap[status].color}`}
+      className={`badge font-semibold p-3 ${statusMap[status].bg} ${statusMap[status].color}`}
     >
       {statusMap[status].label}
     </div>

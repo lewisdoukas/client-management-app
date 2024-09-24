@@ -37,17 +37,12 @@ const ClientDetailsPage = async ({ params, searchParams }: Props) => {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 p-2">
         <ClientCard client={client} />
         <div className="lg:col-span-3 px-4">
-          <div className="flex items-center justify-between lg:justify-center lg:space-x-12">
-            <Link
-              className="btn btn-secondary"
-              href={`/clients/${client.id}/new-case`}
-            >
-              New Case
-            </Link>
-            <Link className="hover:underline" href="/clients">
-              ← Back
-            </Link>
-          </div>
+          <Link
+            className="btn btn-secondary"
+            href={`/clients/cases/new?clientId=${client.id}`}
+          >
+            New Case
+          </Link>
           <CaseTable searchParams={searchParams} client={client} />
         </div>
       </div>

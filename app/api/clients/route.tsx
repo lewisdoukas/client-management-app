@@ -20,12 +20,16 @@ export async function POST(request: NextRequest) {
 
   const { firstname, lastname, phoneNumber, email, address } = validation.data;
 
+  console.log(firstname, lastname, phoneNumber, email, address);
+  let userEmail = email;
+  if (!email || email.length === 0) userEmail = null;
+
   const newClient = await prisma.client.create({
     data: {
       firstname,
       lastname,
       phoneNumber,
-      email,
+      email: userEmail,
       address,
     },
   });

@@ -31,10 +31,10 @@ const DeleteButton = ({ path, client, _case, card = false }: Props) => {
       await axios.delete("/api" + path);
 
       setSubmitting(false);
-      router.push("/clients");
+      router.push(client ? "/clients" : "/clients/cases");
       router.refresh();
 
-      toast.success("Client deleted!");
+      toast.success(client ? "Client deleted" : "Case deleted");
     } catch (err) {
       setSubmitting(false);
       setError("An unexpected error occured");

@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -11,14 +11,16 @@ import Spinner from "@/components/Spinner";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import { Case } from "@prisma/client";
+import classnames from "classnames";
 
 type CaseFormData = z.infer<typeof caseSchema>;
 
 interface Props {
   _case?: Case;
+  clientId: string;
 }
 
-const CaseForm = ({ _case }: Props) => {
+const CaseForm = ({ _case, clientId }: Props) => {
   const router = useRouter();
   const {
     register,
@@ -29,8 +31,6 @@ const CaseForm = ({ _case }: Props) => {
   });
   const [error, setError] = useState("");
   const [isSubmitting, setSubmitting] = useState(false);
-
-  const clientId = usePathname().split("/").at(-2);
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -74,13 +74,18 @@ const CaseForm = ({ _case }: Props) => {
         />
         <FormError message={errors.clientId?.message} />
       </div>
-      <div className="form-control">
+      <div
+        className={classnames({
+          "form-control": true,
+          hidden: !_case,
+        })}
+      >
         <label className="label">
           <span className="label-text">Status</span>
         </label>
         <select
           className="select select-bordered select-sm w-full max-w-xs"
-          defaultValue="OPEN"
+          defaultValue={_case?.status}
           {...register("status")}
         >
           <option value="OPEN">Open</option>

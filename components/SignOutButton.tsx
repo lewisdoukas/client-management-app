@@ -8,7 +8,10 @@ const SignOutButton = () => {
   };
 
   return (
-    <button className="btn btn-outline btn-error" onClick={handleSignOut}>
+    <button
+      className="btn btn-outline btn-sm btn-error"
+      onClick={handleSignOut}
+    >
       <IoExitOutline />
       Sign Out
     </button>

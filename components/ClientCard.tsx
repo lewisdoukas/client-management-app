@@ -34,8 +34,12 @@ const ClientCard = ({ client }: { client: Client }) => {
           )}
         </div>
         <div className="flex justify-center items-center w-full mt-4 space-x-4">
-          <EditButton path={`/clients/edit/${client.id}`} />
-          <DeleteButton path={`/clients/${client.id}`} client={client} />
+          <EditButton path={`/clients/edit/${client.id}`} card={false} />
+          <DeleteButton
+            path={`/clients/${client.id}`}
+            client={client}
+            card={false}
+          />
         </div>
       </div>
     </div>

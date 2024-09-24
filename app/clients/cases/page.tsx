@@ -8,7 +8,6 @@ import { redirect } from "next/navigation";
 import { Status } from "@prisma/client";
 import { prisma } from "@/prisma/client";
 import Pagination from "@/components/Pagination";
-import Link from "next/link";
 
 const CasesPage = async ({ searchParams }: { searchParams: CaseQuery }) => {
   const session = await auth();
@@ -55,12 +54,6 @@ const CasesPage = async ({ searchParams }: { searchParams: CaseQuery }) => {
 
   return (
     <main className="w-full h-full p-2">
-      <div className="flex justify-between">
-        <Link className="hover:underline" href="/clients">
-          ← Back
-        </Link>
-      </div>
-
       <div role="tablist" className="tabs tabs-lifted mt-4 text-center">
         <CaseTable searchParams={searchParams} cases={cases} />
         <Pagination

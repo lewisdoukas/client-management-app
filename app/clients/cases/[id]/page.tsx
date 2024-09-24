@@ -4,7 +4,6 @@ import { notFound, redirect } from "next/navigation";
 import React, { cache } from "react";
 import { ExtendedCase } from "../../../../components/CaseTable";
 import CaseCard from "@/components/CaseCard";
-import Link from "next/link";
 
 interface Props {
   params: { id: string };
@@ -30,11 +29,7 @@ const CaseDetailPage = async ({ params }: Props) => {
 
   return (
     <main className="flex flex-col justify-center items-center text-center">
-      <Link className="hover:underline" href={`/clients/${_case.clientId}`}>
-        ← Back
-      </Link>
-
-      <CaseCard _case={_case} />
+      <CaseCard _case={_case} backUrl={`/clients/${_case.clientId}`} />
     </main>
   );
 };
