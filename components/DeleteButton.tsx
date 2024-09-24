@@ -4,13 +4,23 @@ import { GoTrash } from "react-icons/go";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { Client } from "@prisma/client";
+import { Case, Client } from "@prisma/client";
 
-const DeleteButton = ({ path, client }: { path: string; client: Client }) => {
+interface Props {
+  path: string;
+  client?: Client;
+  _case?: Case;
+}
+
+const DeleteButton = ({ path, client, _case }: Props) => {
   const [error, setError] = useState("");
   const [isSubmitting, setSubmitting] = useState(false);
 
   const router = useRouter();
+
+  const message = client
+    ? `client ${client.lastname} ${client.firstname}?`
+    : `case ${_case.title}?`;
 
   const handleDelete = async () => {
     try {
@@ -34,7 +44,7 @@ const DeleteButton = ({ path, client }: { path: string; client: Client }) => {
   return (
     <>
       <button
-        className="btn btn-outline btn-sm btn-error w-1/2"
+        className="btn btn-outline btn-sm btn-error w-1/2 lg:w-1/4"
         onClick={() =>
           (
             document.getElementById("deleteModal") as HTMLDialogElement
@@ -47,7 +57,7 @@ const DeleteButton = ({ path, client }: { path: string; client: Client }) => {
       <dialog id="deleteModal" className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Delete client</h3>
-          <p className="py-4">{`Are you sure you want to delete client ${client.lastname} ${client.firstname}?`}</p>
+          <p className="py-4">{`Are you sure you want to delete ${message}`}</p>
           <div className="modal-action">
             <form method="dialog">
               <div className="flex justify-end items-center space-x-4">

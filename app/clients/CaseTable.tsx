@@ -62,7 +62,14 @@ const CaseTable = ({ searchParams, cases, client }: Props) => {
         <tbody>
           {items.map((item) => (
             <tr key={item.id}>
-              <td>{item.title}</td>
+              <td>
+                <Link
+                  href={`/clients/cases/${item.id}`}
+                  className="hover:text-secondary"
+                >
+                  {item.title}
+                </Link>
+              </td>
               <td>{item.status}</td>
 
               {client ? null : (
