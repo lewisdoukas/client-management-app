@@ -11,7 +11,7 @@ export const clientSchema = z.object({
 export const caseSchema = z.object({
   title: z.string().min(1, "Title is required").max(255),
   description: z.string().min(1, "Description is required").max(65535),
-  clientId: z.string().min(1, "ClientId is required").max(255),
+  clientId: z.string().max(255).optional().nullable(),
   status: z
     .union([z.literal("OPEN"), z.literal("IN_PROGRESS"), z.literal("CLOSED")])
     .optional()

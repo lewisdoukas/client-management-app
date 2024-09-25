@@ -35,10 +35,11 @@ const CaseForm = ({ _case, clientId }: Props) => {
   const onSubmit = handleSubmit(async (data) => {
     try {
       setSubmitting(true);
-      console.log(data);
 
-      if (_case) await axios.patch("/api/cases/" + _case.id, data);
-      else await axios.post("/api/cases", data);
+      const caseData = { ...data, clientId };
+
+      if (_case) await axios.patch("/api/cases/" + _case.id, caseData);
+      else await axios.post("/api/cases", caseData);
 
       setSubmitting(false);
       router.push("/clients/" + clientId);
@@ -63,17 +64,6 @@ const CaseForm = ({ _case, clientId }: Props) => {
 
       {error && <FormError message={error} />}
 
-      <div className="form-control hidden">
-        <label className="label">
-          <span className="label-text">CliendId</span>
-        </label>
-        <input
-          defaultValue={clientId}
-          className="input input-sm input-bordered"
-          {...register("clientId")}
-        />
-        <FormError message={errors.clientId?.message} />
-      </div>
       <div
         className={classnames({
           "form-control": true,
@@ -85,7 +75,7 @@ const CaseForm = ({ _case, clientId }: Props) => {
         </label>
         <select
           className="select select-bordered select-sm w-full max-w-xs"
-          defaultValue={_case?.status}
+          defaultValue={_case?.status || "OPEN"}
           {...register("status")}
         >
           <option value="OPEN">Open</option>
